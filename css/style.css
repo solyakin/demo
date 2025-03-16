@@ -76,6 +76,25 @@ Tags: consulting, finance, corporate, business, consultant, multipurpose, techno
     color:#c19d68;
 }
 
+.create-room-button{
+    background: #c19d68;
+    max-width: max-content;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 1px;
+}
+
+.create-room-button a {
+    color: white;
+}
+
+.sync-btn {
+    padding: 10px;
+    background: transparent;
+    border: 1px solid rgb(211, 206, 206);
+    border-radius: 1px;
+    max-width: max-content;
+}
 .header-menu ul li i {
     font-size: 11px;
     color: #ffff;

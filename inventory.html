@@ -61,9 +61,9 @@
 			<div class="col-lg-9">
 				<div class="header-menu">
 					<ul>
-						<li class="menu-item-has-children">
+                        <li class="menu-item-has-children">
 							<a href="index.html">Home</a>
-						</li>
+                        </li>
 						<li><a href="about.html">About</a></li>
 						<li class="menu-item-has-children"><a href="#">Rooms<i class="fas fa-chevron-down"></i></a>
                             <ul class="sub-menu">
@@ -89,8 +89,6 @@
 <!-- End Royella Header Area -->
 <!--==================================================-->
 
-
-
 <!--==================================================-->
 <!-- Start Main Menu Area -->
 <!--==================================================-->
@@ -99,6 +97,25 @@
 		<nav class="header-menu">
 			<ul class="nav_scroll">
                 <li class="menu-item-has-children"><a href="#">Home</a>
+                    <ul class="sub-menu">
+			      	  <li><a href="index.html">Hotel Boking</a></li>
+			      	  <li><a href="index-2.html">Resort</a></li>
+			      	  <li><a href="index-3.html">Apartment</a></li>
+			      	  <li><a href="index-4.html">City Hotel</a></li>
+			      	  <li><a href="index-5.html">Hostel</a></li>
+			      	  <li><a href="index-6.html">Tourist</a></li>
+			          <li class="sub-menu-style-two"><a href="#">Landing</a>
+                            <ul class="sub-menu-two">
+                              <li><a href="landing.html">Landing 1</a></li>
+					      	  <li><a href="landing-2.html">Landing 2</a></li>
+					      	  <li><a href="landing-3.html">Landing 3</a></li>
+					      	  <li><a href="landing-4.html">Landing 4</a></li>
+					      	  <li><a href="landing-5.html">Landing 5</a></li>
+					      	  <li><a href="landing-6.html">Landing 6</a></li>
+                           </ul>
+					   </li>
+			      	  <li><a href="rtl.html">RTL Version</a></li>
+				   </ul>
                 </li>
 				<li><a href="about.html">About</a></li>
 				<li class="menu-item-has-children"><a href="#">Rooms</a>
@@ -143,12 +160,12 @@
 			<div class="col-md-12">
 				<div class="breacumb-content">
 					<div class="breadcum-title">
-						<h4>Sign Up</h4>
+						<h4>Inventory</h4>
 					</div>
 					<ul>
 						<li><a href="index.html">Home</a></li>
 						<li>/</li>
-						<li>Sign Up</li>
+						<li>Rooms & Suites</li>
 					</ul>
 				</div>
 			</div>
@@ -159,45 +176,194 @@
 <!-- End Royella Breadcumb Area -->
 <!--==================================================-->
 
-<div class="container style-two mt-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-12">
-            <form method="POST" id="registerForm">
-                <div class="single-contact-form" data-cue="zoomIn">
-                    <div class="contact-content">
-                        <h4>Sign Up</h4>
-                    </div>
-                    <div class="single-input-box">
-                        <input type="text" id="username" name="Username" placeholder="Enter username" required="">
-                    </div>
-                    <div class="single-input-box">
-                        <input type="email" id="email" name="Name" placeholder="Your Email" required="">
-                    </div>
-                    <div class="single-input-box">
-                        <input type="password" id="password" name="Email" placeholder="Enter Password" required="">
-                    </div>
-                    <div class="single-input-box">
-                        <button type="submit">Sent Message</button>
-                    </div>
-                </div>
-            </form>
-            <div id="status"></div>
-            <div class="d-flex gap-1 align-items-center mt-5">
-                <p class="mb-0">Already have an account?</p>
-                <a href="login.html" class="register-link">Login</a>
+<!--==================================================-->
+<!-- Start Royella Room Area -->
+<!--==================================================-->
+<div class="room-area inner">
+	<div class="container">
+        <div class="d-flex gap-2">
+            <div class="create-room-button">
+                <a href="create-inventory.html" class="mb-5">Create New Room</a>
+            </div>
+            <div class="">
+                <button onclick="handleSync()" class="sync-btn">Sync Inventory</button>
             </div>
         </div>
-    </div>
-</div>
-
-<!--==================================================-->
-<!-- Start Royella About Area -->
-<!--==================================================-->
-<div class="about-area inner">
-	<div class="container">
-
+		<div id="inventory-wrapper" class="row align-items-center"></div>
 	</div>
 </div>
+<!--==================================================-->
+<!-- End Royella Room Area -->
+<!--==================================================-->
+
+
+
+
+<!--==================================================-->
+<!-- Start Royella Facilities Area Inner -->
+<!--==================================================-->
+<div class="facilities-area inner">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-12">
+				<div class="section-title two" data-cue="zoomIn">
+					<h4>Luxury Hotel And Resort</h4>
+					<h1>Resote’s Extra Facilities</h1>
+					<h1>For luxurious life</h1>
+				</div>
+			</div>
+		</div>
+		<div class="row border-add">
+			<div class="col-lg-4 col-md-12" data-cue="zoomIn">
+				<div class="facilities-icon">
+					<img src="images/faciliies-icon.png" alt="">
+				</div>
+				<div class="facilities-content">
+					<h4>SPA & Parlor Center</h4>
+					<p>Rapidiously myocardinate cross-platform are
+                     model. Appropriately create interactive infrast
+                     Holisticly facilitate </p>
+                     <a href="services-details.html">View Details<i class="bi bi-arrow-right"></i></a>
+				</div>
+			</div>
+			<div class="col-lg-8 col-md-12">
+				<div class="row" data-cue="zoomIn">
+					<div class="facilities-list owl-carousel">
+						<div class="col-md-12">
+							<div class="single-facilities-box">
+								<div class="facilities-thumb">
+									<img src="images/facilities-1.jpg" alt="">
+								</div>
+								<div class="facilities-button">
+									<a href="services-details.html">Gym Training Ground<i class="bi bi-arrow-right-short"></i></a>
+								</div>
+							</div>
+						</div>						
+						<div class="col-md-12">
+							<div class="single-facilities-box">
+								<div class="facilities-thumb">
+									<img src="images/facilities-2.jpg" alt="">
+								</div>
+								<div class="facilities-button">
+									<a href="services-details.html">Indoor Swimming Pool<i class="bi bi-arrow-right-short"></i></a>
+								</div>
+							</div>
+						</div>						
+						<div class="col-md-12">
+							<div class="single-facilities-box">
+								<div class="facilities-thumb">
+									<img src="images/facilities-3.jpg" alt="">
+								</div>
+								<div class="facilities-button">
+									<a href="services-details.html">Cafe & Restaurent Center<i class="bi bi-arrow-right-short"></i></a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="single-facilities-box">
+								<div class="facilities-thumb">
+									<img src="images/facilities-1.jpg" alt="">
+								</div>
+								<div class="facilities-button">
+									<a href="services-details.html">Gym Training Ground<i class="bi bi-arrow-right-short"></i></a>
+								</div>
+							</div>
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--==================================================-->
+<!-- End Royella Facilities Area Inner-->
+<!--==================================================-->
+
+
+
+
+<!--==================================================-->
+<!-- Start Royella Contact Area Inner -->
+<!--==================================================-->
+<div class="contact-area style-two">
+	<div class="container">
+		<div class="row add-backgroun">
+			<div class="col-lg-6 col-md-12">
+				<div class="section-title two" data-cue="zoomIn">
+					<h4>Contact us</h4>
+					<h1>Contact With Us</h1>
+					<p class="section-desc-2">Rapidiously myocardinate cross-platform intellectual capital after the
+                       model. Appropriately create interactive infrastructures after maintance
+                       Holisticly facilitate stand-alone
+					</p>
+				</div>
+				<div class="single-contact-box" data-cue="zoomIn">
+					<div class="contact-icon">
+						<i class="bi bi-telephone-fill"></i>
+					</div>
+					<div class="contact-title">
+						<h4>Call Us Now</h4>
+						<p>+980 123 (4567) 890</p>
+					</div>
+				</div>				
+				<div class="single-contact-box" data-cue="zoomIn">
+					<div class="contact-icon">
+						<i class="bi bi-envelope"></i>
+					</div>
+					<div class="contact-title">
+						<h4>Sent Email</h4>
+						<p>example@gmail.com</p>
+					</div>
+				</div>					
+				<div class="single-contact-box" data-cue="zoomIn">
+					<div class="contact-icon">
+						<i class="bi bi-geo-alt-fill"></i>
+					</div>
+					<div class="contact-title">
+						<h4>Our Locations</h4>
+						<p>New elephant Road, Dhanmondi<br>Dhaka - 1212</p>
+					</div>
+				</div>	
+			</div>
+			<div class="col-lg-6 col-md-12">
+				<form action="https://formspree.io/f/myyleorq" method="POST" id="dreamit-form">
+					<div class="single-contact-form" data-cue="zoomIn">
+						<div class="contact-content">
+							<h4>Get In Touch</h4>
+						</div>
+						<div class="single-input-box">
+							<input type="text" name="Name" placeholder="Your Name" required="">
+						</div>
+						<div class="single-input-box">
+							<input type="text" name="Email" placeholder="Enter Your Email" required="">
+						</div>
+						<div class="single-input-box">
+					        <select name="Subject" id="Subject">
+					        	<option value="saab">select Subject</option>
+					        	<option value="opel">Luxury Hotel</option>
+					        	<option value="audi">Room</option>
+					        	<option value="audi">Hottel</option>
+					        </select>
+						</div>
+						<div class="single-input-box">
+							<textarea name="Message" id="Message" placeholder="Write Message"></textarea>
+						</div>
+						<div class="single-input-box">
+							<button type="submit">Sent Message</button>
+						</div>
+					</div>
+				</form>
+				<div id="status"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--==================================================-->
+<!-- End Royella Contact Area Inner -->
+<!--==================================================-->
+
+
+
 
 <!--==================================================-->
 <!-- Start Royella Brand Area -->
@@ -239,6 +405,7 @@
 <!--==================================================-->
 <!-- End Royella Brand Area -->
 <!--==================================================-->
+
 
 
 
@@ -327,6 +494,7 @@
 <!-- End Royella Footer Area -->
 <!--==================================================-->
 
+<div class="data-container"></div>
 
 
 <!--==================================================-->
@@ -349,7 +517,6 @@
 
 
 
-
 <!--==================================================-->
 	<!-- Start Curser Section Here -->
 	<!--==================================================-->
@@ -358,6 +525,7 @@
 	<!--==================================================-->
 	<!-- Ends Curser Section Here -->
 	<!--==================================================-->
+
 
 
 
@@ -373,37 +541,140 @@
 <!-- Start scrollup section Section -->
 <!--==================================================-->
 
+    <script>
+        const roomContainer = document.getElementById("inventory-wrapper");
+        const API_URL = "http://hotel-demo-backend-env.eba-sitex3ts.us-east-1.elasticbeanstalk.com/inventory";
+        const API_TOKEN = localStorage.getItem("token");
 
-	<script>
-		document.getElementById("registerForm")
-		.addEventListener("submit", async (event) => {
-		event.preventDefault();
+        async function handleSync() {
+            console.log("clikc")
+            try {
+                const response = await fetch(`${API_URL}/sync`, {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${API_TOKEN}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: ""
+                });
+                if (!response.ok) throw new Error("Failed to sync inventory");
+                if(response.ok){
+                    console.log(response);
+                    showToast("Inventory synced successfully!", "success");
+                }
 
-		const email = document.getElementById("email").value;
-		const password = document.getElementById("password").value;
-		const username = document.getElementById("username").value;
-		const payload = {
-			"username": username,
-			"password": password,
-			"email": email
-		}
+            } catch (error) {
+                console.error(error);
+                showToast("Failed to sync inventory.", "error");
+            }
+        }
 
-		const response = await fetch("http://hotel-demo-backend-env.eba-sitex3ts.us-east-1.elasticbeanstalk.com/auth/register", {
-			method: "POST",
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(payload)
-		})
-		.then((response) => response.json())
-		.then(data => {
-			if(data)
-			window.location.href = "/login.html";
-		})
-		.catch(error => console.error(error))
+        async function fetchData() {
+        try {
+            const response = await fetch(API_URL, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${API_TOKEN}`,
+                "Content-Type": "application/json"
+            }
+            });
 
-		});
-	</script>
+            if (!response.ok) throw new Error("Failed to fetch data");
+
+            const datal = await response.json();
+            const records = datal?.inventory;
+            if(records && roomContainer){
+            let newHtml = "";
+            for(const e of records) {
+                const amenitiesList = e.amenities
+                    .map((amenity) => `<li class="">${amenity}</li>`)
+                    .join("|");
+
+                newHtml += `
+                <div class="col-lg-4 col-md-6">
+                    <div class="room-single-box">
+                    <div class="room-thumb">
+                        <img src="${e.images[0]}" alt="">
+                        <div class="room-details-button">
+                            <a href="room-details.html?id=${e.id}">View Details<i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="room-pricing">
+                        <span class="dolar">${e?.price?.toLocaleString() || ""}</span>
+                        <span>Night</span>
+                    </div>
+                    <div class="room-content">
+                        <h4>Luxury Room</h4>
+                        <a href="room-details.html">${e.roomType}</a>
+                        <div class="room-amenities">
+                        <ul class="d-flex gap-2">
+                            ${amenitiesList}
+                        </ul>
+                        </div>
+                    </div>
+                    <div class="room-bottom">
+                        <div class="room-bottom-icon">
+                        <span><img src="images/room-bottom-icon.png" alt="">${e.capacity} Persons</span>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <p>Edit</p>
+                            <p class="delete-button cursor-pointer" data-id="${e.id}" onclick="handleDelete('${e.id}')">Delete</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                `
+            }
+            roomContainer.innerHTML = newHtml;
+            }
+        } catch (error) {
+                console.error(error);
+                roomContainer.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            }
+        }
+
+        async function handleDelete (id) {
+            try {
+                const response = await fetch(`${API_URL}/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Authorization": `Bearer ${API_TOKEN}`,
+                        "Content-Type": "application/json"
+                    }
+                });
+                if(response.ok){
+                    showToast("Room deleted successfully!", "success");
+                    fetchData();
+                }
+
+            } catch (error) {
+                console.error(error);
+                showToast("Failed to delete room.", "error");
+            }
+        }
+
+        function showToast(message, type) {
+            let backgroundColor = type === "success" ? "lightgreen" : "lightcoral";
+            let toast = document.createElement('div');
+            toast.style.position = 'fixed';
+            toast.style.top = '20px';
+            toast.style.right = '20px';
+            toast.style.backgroundColor = backgroundColor;
+            toast.style.padding = '15px';
+            toast.style.borderRadius = '5px';
+            toast.style.zIndex = '1000';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000); // Remove toast after 3 seconds
+        }
+
+        window.onload = function () {
+            fetchData();
+        };
+    </script>
 	<!-- jquery js -->
 	<script src="js/jquery-3.6.2.min.js"></script>
 	<script src="js/popper.min.js"></script>
@@ -443,4 +714,27 @@
 	<script src="js/scrollCue.min.js"></script>
 
 
+	<script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.fancybox.js"></script>
+    <script src="js/isotope.js"></script>
+    <script src="js/owl.js"></script>
+    <script src="js/appear.js"></script>
+    <script src="js/wow.js"></script>
+    <script src="js/scrollbar.js"></script>
+    <script src="js/TweenMax.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/parallax-scroll.js"></script>
+    <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/booking-form.js"></script>
+    <script src="js/script.js"></script>
+    <script src="main.js"></script>
+
+    <script
+      src="./js/cdn.js"
+      id="mepaas-rewards"
+      api-key="rdwdkywgorzoop37cqghg"
+      env="staging"
+    ></script>
 </body></html>

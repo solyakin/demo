@@ -68,7 +68,6 @@
 						<li class="menu-item-has-children"><a href="#">Rooms<i class="fas fa-chevron-down"></i></a>
                             <ul class="sub-menu">
 					      	  <li><a href="room.html">Room</a></li>
-					      	  <!-- <li><a href="find-room.html">Find Room</a></li> -->
 					      	  <li><a href="inventory.html">Inventory</a></li>
 						   </ul>
 						</li>
@@ -143,12 +142,12 @@
 			<div class="col-md-12">
 				<div class="breacumb-content">
 					<div class="breadcum-title">
-						<h4>Sign Up</h4>
+						<h4>inventory</h4>
 					</div>
 					<ul>
 						<li><a href="index.html">Home</a></li>
 						<li>/</li>
-						<li>Sign Up</li>
+						<li>Create Room</li>
 					</ul>
 				</div>
 			</div>
@@ -162,30 +161,45 @@
 <div class="container style-two mt-5">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-12">
-            <form method="POST" id="registerForm">
+            <form method="POST" id="loginForm">
                 <div class="single-contact-form" data-cue="zoomIn">
                     <div class="contact-content">
-                        <h4>Sign Up</h4>
+                        <h4>Login</h4>
                     </div>
                     <div class="single-input-box">
-                        <input type="text" id="username" name="Username" placeholder="Enter username" required="">
+                        <input type="text" id="roomNo" name="RoomNo" placeholder="Enter Room No" required="">
                     </div>
                     <div class="single-input-box">
-                        <input type="email" id="email" name="Name" placeholder="Your Email" required="">
+                        <input type="text" id="roomType" name="roomType" placeholder="Enter Room Type" required="">
                     </div>
                     <div class="single-input-box">
-                        <input type="password" id="password" name="Email" placeholder="Enter Password" required="">
+                        <input type="number" id="price" name="price" placeholder="Enter Price" required="">
                     </div>
                     <div class="single-input-box">
-                        <button type="submit">Sent Message</button>
+                        <select name="availability" id="availability">
+                            <option value="">Select Availability</option>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+                    <div class="single-input-box">
+                        <input type="number" id="capacity" name="capacity" placeholder="Enter Capacity" required="">
+                    </div>
+                    <div class="single-input-box">
+                        <textarea id="description" name="description" rows="5" cols="40" placeholder="Enter Description" required=""></textarea>
+                    </div>
+                    <div class="single-input-box">
+                        <input type="text" id="images" name="images" placeholder="Enter Image Url sepeared by commas" required="">
+                    </div>
+                    <div class="single-input-box">
+                        <input type="text" id="amenities" name="amenities" required="" placeholder="Enter Amenities sepeared by comma">
+                    </div>
+                    <div class="single-input-box">
+                        <button type="submit">Create Room</button>
                     </div>
                 </div>
             </form>
             <div id="status"></div>
-            <div class="d-flex gap-1 align-items-center mt-5">
-                <p class="mb-0">Already have an account?</p>
-                <a href="login.html" class="register-link">Login</a>
-            </div>
         </div>
     </div>
 </div>
@@ -195,7 +209,6 @@
 <!--==================================================-->
 <div class="about-area inner">
 	<div class="container">
-
 	</div>
 </div>
 
@@ -298,7 +311,7 @@
 					</div>
 					<div class="footer-widget-gallery">
                         <a class="place venobox vbox-item" data-gall="lace-imgs" href="assets/images/home-1/gallery-1.jpg"><img src="images/gallery-1.jpg" alt=""></a>                       
-                         <a class="place venobox vbox-item" data-gall="lace-imgs" href="assets/images/home-1/gallery-2.jpg"><img src="images/gallery-2.jpg" alt=""></a>                      
+                        <a class="place venobox vbox-item" data-gall="lace-imgs" href="assets/images/home-1/gallery-2.jpg"><img src="images/gallery-2.jpg" alt=""></a>                      
                         <a class="place venobox vbox-item" data-gall="lace-imgs" href="assets/images/home-1/gallery-3.jpg"><img src="images/gallery-3.jpg" alt=""></a> 
                         <a class="place venobox vbox-item" data-gall="lace-imgs" href="assets/images/home-1/gallery-4.jpg"><img src="images/gallery-4.jpg" alt=""></a> 
                         <a class="place venobox vbox-item" data-gall="lace-imgs" href="assets/images/home-1/gallery-5.jpg"><img src="images/gallery-5.jpg" alt=""></a>
@@ -359,8 +372,6 @@
 	<!-- Ends Curser Section Here -->
 	<!--==================================================-->
 
-
-
 <!--==================================================-->
 <!-- Start scrollup section Section -->
 <!--==================================================-->
@@ -373,37 +384,86 @@
 <!-- Start scrollup section Section -->
 <!--==================================================-->
 
-
 	<script>
-		document.getElementById("registerForm")
-		.addEventListener("submit", async (event) => {
-		event.preventDefault();
+        const API_URL = "http://hotel-demo-backend-env.eba-sitex3ts.us-east-1.elasticbeanstalk.com/inventory";
+		const API_TOKEN = localStorage.getItem("token");
 
-		const email = document.getElementById("email").value;
-		const password = document.getElementById("password").value;
-		const username = document.getElementById("username").value;
-		const payload = {
-			"username": username,
-			"password": password,
-			"email": email
-		}
+        // const toastTrigger = document.getElementById('liveToastBtn')
+        // const toastLiveExample = document.getElementById('liveToast')
 
-		const response = await fetch("http://hotel-demo-backend-env.eba-sitex3ts.us-east-1.elasticbeanstalk.com/auth/register", {
+        // const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        // toastBootstrap.show();
+
+		document.getElementById("loginForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const roomNo = document.getElementById("roomNo").value;
+          const roomType = document.getElementById("roomType").value;
+          const price = document.getElementById("price").value;
+          const availability = document.getElementById("availability").value;
+          const capacity = document.getElementById("capacity").value;
+          const description = document.getElementById("description").value;
+          const images = document.getElementById("images").value;
+          const amenities = document.getElementById("amenities").value;
+
+          const imageList = images.split(",");
+          const amenitiesList = amenities.split(",");
+
+		  const payload = {
+			roomNumber: roomNo,
+			roomType: roomType,
+            slug: `${roomType}-room-${roomNo}`,
+            price: price,
+            available: true,
+            capacity: capacity,
+            amenities: amenitiesList,
+            images: imageList,
+            description: description
+        }
+
+		const response = await fetch(API_URL, {
 			method: "POST",
 			headers: {
+                "Authorization": `Bearer ${API_TOKEN}`,
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(payload)
 		})
 		.then((response) => response.json())
 		.then(data => {
-			if(data)
-			window.location.href = "/login.html";
+            if (data) {
+                showToast("Room created successfully!", "success");
+                window.location.href = "/inventory.html";
+            }
 		})
-		.catch(error => console.error(error))
+		.catch(error => {
+            console.error(error)
+            showToast("Failed to create!", "error");
+        })
 
-		});
+        });
+
+        function showToast(message, type) {
+            let backgroundColor = type === "success" ? "lightgreen" : "lightcoral";
+            let toast = document.createElement('div');
+            toast.style.position = 'fixed';
+            toast.style.top = '20px';
+            toast.style.right = '20px';
+            toast.style.backgroundColor = backgroundColor;
+            toast.style.padding = '15px';
+            toast.style.borderRadius = '5px';
+            toast.style.zIndex = '1000';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000); // Remove toast after 3 seconds
+        }
+
 	</script>
+
 	<!-- jquery js -->
 	<script src="js/jquery-3.6.2.min.js"></script>
 	<script src="js/popper.min.js"></script>

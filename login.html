@@ -68,8 +68,7 @@
 						<li class="menu-item-has-children"><a href="#">Rooms<i class="fas fa-chevron-down"></i></a>
                             <ul class="sub-menu">
 					      	  <li><a href="room.html">Room</a></li>
-					      	  <!-- <li><a href="find-room.html">Find Room</a></li> -->
-					      	  <li><a href="room-details.html">Room Details</a></li>
+					      	  <li><a href="inventory.html">Inventory</a></li>
 						   </ul>
 						</li>
 						<li class="menu-item-has-children">
@@ -162,19 +161,19 @@
 <div class="container style-two mt-5">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-12">
-            <form method="POST" id="dreamit-form">
+            <form method="POST" id="loginForm">
                 <div class="single-contact-form" data-cue="zoomIn">
                     <div class="contact-content">
                         <h4>Login</h4>
                     </div>
                     <div class="single-input-box">
-                        <input type="email" name="Name" placeholder="Your Email" required="">
+                        <input type="email" id="email" name="Name" placeholder="Your Email" required="">
                     </div>
                     <div class="single-input-box">
-                        <input type="password" name="Email" placeholder="Enter Password" required="">
+                        <input type="password" id="password" name="password" placeholder="Enter Password" required="">
                     </div>
                     <div class="single-input-box">
-                        <button type="submit">Sent Message</button>
+                        <button type="submit">Login</button>
                     </div>
                 </div>
             </form>
@@ -370,6 +369,37 @@
 <!-- Start scrollup section Section -->
 <!--==================================================-->
 
+	<script>
+		document.getElementById("loginForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+		  const payload = {
+			email: email,
+			password: password
+		  }
+
+		const response = await fetch("http://hotel-demo-backend-env.eba-sitex3ts.us-east-1.elasticbeanstalk.com/auth/login", {
+			method: "POST",
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(payload)
+		})
+		.then((response) => response.json())
+		.then(data => {
+			if(data){
+				localStorage.setItem("token", data?.token);
+				localStorage.setItem("profile", JSON.stringify(data?.profile))
+				window.location.href = "/room.html";
+			}
+		})
+		.catch(error => console.error(error))
+
+        });
+	</script>
 
 	<!-- jquery js -->
 	<script src="js/jquery-3.6.2.min.js"></script>

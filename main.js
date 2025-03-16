@@ -373,110 +373,87 @@ const data = [
   },
 ];
 
-const wrapper = document.getElementById("wrapper");
-const navWrapper = document.createElement("div");
-wrapper.prepend(navWrapper);
-
 const email = localStorage.getItem("email");
+
+const roomContainer = document.getElementById("room-container");
+const API_URL = "http://hotel-demo-backend-env.eba-sitex3ts.us-east-1.elasticbeanstalk.com/inventory";
+const API_TOKEN = localStorage.getItem("token");
 
 if (email) {
   window.customerEmail = email;
 }
 
-navWrapper.innerHTML = `<header class="transparent has-topbar">
-        <div id="topbar">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="d-flex justify-content-between xs-hide">
-                  <div class="header-widget d-flex">
-                    <div class="topbar-widget">
-                      <a href="#"
-                        ><i class="icofont-location-pin"></i>742 Evergreen
-                        Terrace Brooklyn, NY 11201</a
-                      >
-                    </div>
-                    <div class="topbar-widget">
-                      <a href="#"><i class="icofont-phone"></i>+929 333 9296</a>
-                    </div>
-                    <div class="topbar-widget">
-                      <a href="#"
-                        ><i class="icofont-envelope"></i>contact@almaris.com</a
-                      >
-                    </div>
-                  </div>
+async function fetchData() {
+  try {
+    const response = await fetch(API_URL, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${API_TOKEN}`,
+        "Content-Type": "application/json"
+      }
+    });
 
-                  <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-facebook fa-lg"></i></a>
-                    <a href="#"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
-                    <a href="#"><i class="fa-brands fa-youtube fa-lg"></i></a>
-                    <a href="#"><i class="fa-brands fa-pinterest fa-lg"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram fa-lg"></i></a>
-                  </div>
+    if (!response.ok) throw new Error("Failed to fetch data");
+
+    const datal = await response.json();
+    const records = datal?.inventory;
+    if(records && roomContainer){
+      let newHtml = "";
+      for(const e of records) {
+        const amenitiesList = e.amenities
+              .map((amenity) => `<li class="">${amenity}</li>`)
+              .join("|");
+        newHtml += `
+          <div class="col-lg-4 col-md-6">
+            <div class="room-single-box">
+              <div class="room-thumb">
+                <img src="${e.images[0]}" alt="">
+                <div class="room-details-button">
+                  <a href="room-details.html?id=${e.id}">View Details<i class="bi bi-arrow-right"></i></a>
                 </div>
               </div>
-            </div>
-            <div class="clearfix"></div>
-          </div>
-        </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="de-flex sm-pt10">
-                <div class="de-flex-col">
-                  <!-- logo begin -->
-                  <div id="logo">
-                    <a href="index.html">
-                      <img
-                        class="logo-main"
-                        src="images/logo-white.webp"
-                        alt=""
-                      />
-                      <img
-                        class="logo-scroll"
-                        src="images/logo-black.webp"
-                        alt=""
-                      />
-                      <img
-                        class="logo-mobile"
-                        src="images/logo-white.webp"
-                        alt=""
-                      />
-                    </a>
-                  </div>
-                  <!-- logo close -->
-                </div>
-                <div class="de-flex-col header-col-mid">
-                  <ul id="mainmenu">
-                    <li><a class="menu-item" href="index.html">Home</a></li>
-                    <li>
-                      <a class="menu-item" href="rooms.html">Rooms</a>
-                    </li>
-                    <li><a class="menu-item" href="news.html">News</a></li>
-                    <li>
-                      <a class="menu-item" href="contact.html">Contact</a>
-                    </li>
+              <div class="room-pricing">
+                <span class="dolar">${e?.price?.toLocaleString() || ""}</span>
+                <span>Night</span>
+              </div>
+              <div class="room-content">
+                <h4>Luxury Room</h4>
+                <a href="room-details.html">${e.roomType}</a>
+                <div class="room-amenities">
+                  <ul class="d-flex gap-2">
+                    ${amenitiesList}
                   </ul>
                 </div>
-                ${
-                  !email
-                    ? `<div class="de-flex-col">
-                  <div class="menu_side_area">
-                    <a href="login.html" class="btn-main btn-line">Login</a>
-                    <span id="menu-btn"></span>
-                  </div>
-                </div>`
-                    : `<div class="de-flex-col">
-                                <div class="menu_side_area">          
-                                    <span id="menu-btn"></span>
-                                </div>
-                            </div>`
-                }
+              </div>
+              <div class="room-bottom">
+                <div class="room-bottom-icon">
+                  <span><img src="images/room-bottom-icon.png" alt="">${e.capacity} Persons</span>
+                </div>
+                <div class="coustomar-rating">
+                  <ul>
+                    <li><i class="bi bi-star-fill"></i></li>
+                    <li><i class="bi bi-star-fill"></i></li>
+                    <li><i class="bi bi-star-fill"></i></li>
+                    <li><i class="bi bi-star-fill"></i></li>
+                    <li><i class="bi bi-star-half"></i></li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </header>`;
+          `
+      }
+      roomContainer.innerHTML = newHtml;
+    }
+  } catch (error) {
+    console.error(error);
+    roomContainer.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+  }
+}
+
+window.onload = function () {
+  fetchData();
+};
 
 const roomList = document.getElementById("roomList");
 
@@ -487,65 +464,138 @@ if (roomList) {
     newHtml =
       newHtml +
       `<div class="col-lg-4 col-sm-6">
-                <div
-                  class="hover relative text-light text-center wow fadeInUp"
-                  data-wow-delay=".4s"
-                >
-                  <img src="${e.coverImage}" class="img-fluid" alt="" />
-                  <div class="abs hover-op-1 z-4 hover-mt-40 abs-centered">
-                    <div class="fs-14">From</div>
-                    <h3 class="fs-40 lh-1 mb-4">$${e.price}</h3>
-                    <a class="btn-line" href="room-single.html?id=${e.productIdOnBrandSite}">View Details</a>
-                  </div>
-                  <div
-                    class="abs bg-color z-2 top-0 w-100 h-100 hover-op-1"
-                  ></div>
-                  <div
-                    class="abs z-2 bottom-0 mb-3 w-100 text-center hover-op-0"
-                  >
-                    <h3 class="mb-0">${e.name}</h3>
-                    <div class="text-center fs-14">
-                      <span class="mx-2"> 2 Guests </span>
-                      <span class="mx-2"> 35 ft </span>
-                    </div>
-                  </div>
-                  <div
-                    class="gradient-trans-color-bottom abs w-100 h-40 bottom-0"
-                  ></div>
-                </div>
-              </div>`;
+          <div
+            class="hover relative text-light text-center wow fadeInUp"
+            data-wow-delay=".4s"
+          >
+            <img src="${e.coverImage}" class="img-fluid" alt="" />
+            <div class="abs hover-op-1 z-4 hover-mt-40 abs-centered">
+              <div class="fs-14">From</div>
+              <h3 class="fs-40 lh-1 mb-4">$${e.price}</h3>
+              <a class="btn-line" href="room-single.html?id=${e.productIdOnBrandSite}">View Details</a>
+            </div>
+            <div
+              class="abs bg-color z-2 top-0 w-100 h-100 hover-op-1"
+            ></div>
+            <div
+              class="abs z-2 bottom-0 mb-3 w-100 text-center hover-op-0"
+            >
+              <h3 class="mb-0">${e.name}</h3>
+              <div class="text-center fs-14">
+                <span class="mx-2"> 2 Guests </span>
+                <span class="mx-2"> 35 ft </span>
+              </div>
+            </div>
+            <div
+              class="gradient-trans-color-bottom abs w-100 h-40 bottom-0"
+            ></div>
+          </div>
+        </div>`;
   }
 
   roomList.innerHTML = newHtml;
 }
 
-const selectRoom = document.getElementById("selectRoom");
+const selectRoom = document.getElementById("selectedRoom");
 
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get("id");
 const apiKey = "rdwdkywgorzoop37cqghg";
 
-if (selectRoom) {
-  let newHtml = "";
+async function fetchRoomById() {
+  try {
+    const response = await fetch(API_URL, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${API_TOKEN}`,
+        "Content-Type": "application/json"
+      }
+    });
 
-  // product with productId should be first item
-  const options = data.filter((e) => e.productIdOnBrandSite !== productId);
-  const product = data.find((e) => e.productIdOnBrandSite === productId);
+    if (!response.ok) throw new Error("Failed to fetch data");
 
-  const sortedData = [product, ...options];
-  console.log(product);
-  for (const e of sortedData) {
-    newHtml =
-      newHtml +
-      `<option
-                          value="${e.productIdOnBrandSite}"
-                          data-src="${e.coverImage}"
-                        >
-                          ${e.name} | $${e.price}/night | 2 Guests
-                        </option>`;
+    const datal = await response.json();
+    const records = datal?.inventory;
+    let newHtml = "";
+
+    if(records &&  selectRoom){
+      const currentRoom = records?.filter((e) => e.id === Number(productId));
+      for (const e of currentRoom) {
+        const roomImages = e.images
+              .map((image) => `
+                  <div class="">
+                    <div class="room-detils-thumb">
+                      <img src="${image}" alt="">
+                    </div>
+                  </div>	
+              `)
+              .join("");
+
+        newHtml +=
+          `
+          <div class="">
+            <div class="row">
+              <div class="room-details-list d-flex gap-3">
+              ${roomImages}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="room-details-content">
+                  <h4>Luxury Room</h4>
+                  <h1>${e.roomType}</h1>
+                  <p class="room-detils-desc">${e.description}</p>
+                  <div class="room-details-check-box">
+                    <div class="room-details-check-content">
+                      <span><img src="images/room-details-1.png" alt="">Check In</span>
+                      <p class="check-item"><i class="bi bi-check2"></i>Check-in from 9:00 AM - anytime</p>
+                      <p class="check-item"><i class="bi bi-check2"></i>Early check-in subject to availability</p>
+                    </div>
+                  </div>   
+
+                  <div class="room-details-check-box upper">
+                    <div class="room-details-check-content">
+                      <span><img src="images/room-details-2.png" alt="">Check Out</span>
+                      <p class="check-item"><i class="bi bi-check2"></i>Check-out before noon</p>
+                      <p class="check-item"><i class="bi bi-check2"></i>Check-out from 9:00 AM - anytime</p>
+                    </div>
+                  </div>
+
+                  <h1 class="room-detils-title-2">House Rules</h1>
+                  <p class="room-detils-desc upper">Professionally deliver fully researched scenarios with turnkey communities.
+                    Competently unleash empowered applications without seamless data.
+                    Uniquely underwhelm quality outsourcing before transparent relationships.
+                    Efficiently enhance diverse relationships whereas leveraged</p>  
+
+                  <h1 class="room-detils-title-2">Childreen & Extra Beds</h1>
+                  <p class="room-detils-desc"">Applications without seamless data. Uniquely underwhelm quality outsourcing before 
+                    transparent relationships. Efficiently enhance diverse relationships whereas leveraged new house cafe.</p>
+
+                  <div class="room-detls-list-item">
+                    <ul>
+                      <li><i class="bi bi-check2"></i>Quickly generate bricks-and-clicks</li>
+                      <li><i class="bi bi-check2"></i>Interactively cultivate visionary platforms</li>
+                      <li><i class="bi bi-check2"></i>Energistically envisioneer resource</li>
+                      <li><i class="bi bi-check2"></i>Uniquely restore turnkey paradigms</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          `;
+      }
+    
+      selectRoom.innerHTML = newHtml;
+    }
+
+  } catch (error) {
+    console.error(error);
   }
+}
 
-  selectRoom.innerHTML = newHtml;
+if (selectRoom) {
+  fetchRoomById();
 }
 
 if (productId) {
