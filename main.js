@@ -376,7 +376,7 @@ const data = [
 const email = localStorage.getItem("email");
 
 const roomContainer = document.getElementById("room-container");
-const API_URL = "http://hotel-demo-backend-env.eba-sitex3ts.us-east-1.elasticbeanstalk.com/inventory";
+const API_URL = "https://hotel-backend-api.meappbounty.com/inventory";
 const API_TOKEN = localStorage.getItem("token");
 
 if (email) {
