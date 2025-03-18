@@ -7906,6 +7906,31 @@ a.dark-logo {
 .style-two .single-contact-box:last-child:before{
     background: transparent;
 }
+.form-border select {
+    background: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'><path d='M0 0h24v24H0z' fill='none'></svg>")
+      right 5px center no-repeat !important;
+}
+  
+.form-border h4 {
+font-family: var(--body-font);
+font-size: 16px;
+}
+
+.reserve {
+    background: #C19E66;
+    color: white;
+    padding: 10px;
+    width: 230px;
+    margin-top: 30px;
+}
+.reserve:hover{
+    color: white;
+}
+
+.rtl .form-border select {
+background: none !important;
+padding-left: 20px;
+}
 
 .style-two .contact-icon i {
     background: #ffff;

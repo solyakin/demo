@@ -1081,7 +1081,7 @@
 						<div class="room-thumb">
 							<img src="${e.images[0]}" alt="">
 							<div class="room-details-button">
-							<a href="room-details.html?id=${e.id}">View Details<i class="bi bi-arrow-right"></i></a>
+							<a href="room-single.html?id=${e.slug}">View Details<i class="bi bi-arrow-right"></i></a>
 							</div>
 						</div>
 						<div class="room-pricing">
@@ -1124,8 +1124,24 @@
 			}
 
 			window.onload = function () {
-			fetchData();
+				fetchData();
+				localStorage.setItem("apiKey", "y3krjw44aq7kkwixupd0j");
+				// Set customer data\
+				const email = localStorage.getItem("email");
+				window.customerEmail = email;
+				window.apiKey = "y3krjw44aq7kkwixupd0j";
+
+				const { customerEmail, apiKey } = window;
+				console.log("~~~~here~~~~", { customerEmail, apiKey });
+
+				if (email) {
+				const loginButton = document.getElementById("login-btn");
+				if (loginButton) {
+					loginButton.style.display = "none"; // Hide the element
+				}
+				}
 			};
+
 	</script>
 
 	<!-- jquery js -->

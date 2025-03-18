@@ -409,7 +409,7 @@ async function fetchData() {
               <div class="room-thumb">
                 <img src="${e.images[0]}" alt="">
                 <div class="room-details-button">
-                  <a href="room-details.html?id=${e.id}">View Details<i class="bi bi-arrow-right"></i></a>
+                  <a href="room-single.html?id=${e.slug}">View Details<i class="bi bi-arrow-right"></i></a>
                 </div>
               </div>
               <div class="room-pricing">
@@ -519,7 +519,7 @@ async function fetchRoomById() {
     let newHtml = "";
 
     if(records &&  selectRoom){
-      const currentRoom = records?.filter((e) => e.id === Number(productId));
+      const currentRoom = records?.filter((e) => e.slug === productId);
       for (const e of currentRoom) {
         const roomImages = e.images
               .map((image) => `
@@ -581,6 +581,9 @@ async function fetchRoomById() {
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="">
+              <a href="reservation.html?id=${e.slug}" class="reserve">Book Now</a>
             </div>
           </div>
           `;

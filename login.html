@@ -186,14 +186,6 @@
     </div>
 </div>
 
-<!--==================================================-->
-<!-- Start Royella About Area -->
-<!--==================================================-->
-<div class="about-area inner">
-	<div class="container">
-
-	</div>
-</div>
 
 <!--==================================================-->
 <!-- Start Royella Brand Area -->
@@ -393,11 +385,24 @@
 			if(data){
 				localStorage.setItem("token", data?.token);
 				localStorage.setItem("profile", JSON.stringify(data?.profile))
+
+				const existingUsers =
+					JSON.parse(localStorage.getItem("existing-users")) || [];
+
+				const userExists = existingUsers.includes(email);
+
+				if (!userExists) {
+					window.alert(
+					"Account does not exist. You must register to continue."
+					);
+					return;
+				}
+				localStorage.setItem("email", email);
 				window.location.href = "/room.html";
 			}
 		})
-		.catch(error => console.error(error))
-
+		.catch(
+			error => console.error(error))
         });
 	</script>
 
