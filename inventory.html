@@ -596,7 +596,7 @@
                     <div class="room-thumb">
                         <img src="${e.images[0]}" alt="">
                         <div class="room-details-button">
-                            <a href="room-details.html?id=${e.id}">View Details<i class="bi bi-arrow-right"></i></a>
+                            <a href="room-single.html?id=${e.slug}">View Details<i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                     <div class="room-pricing">
@@ -617,7 +617,7 @@
                         <span><img src="images/room-bottom-icon.png" alt="">${e.capacity} Persons</span>
                         </div>
                         <div class="d-flex gap-2">
-                            <p class="delete-button cursor-pointer" data-id="${e.id}" onclick="handleDelete('${e.id}')">Delete</p>
+                            <p class="delete-button" data-id="${e.id}" onclick="handleDelete('${e.id}')">Delete</p>
                         </div>
                     </div>
                     </div>
