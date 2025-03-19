@@ -386,10 +386,10 @@
 				localStorage.setItem("token", data?.token);
 				localStorage.setItem("profile", JSON.stringify(data?.profile))
 
-				// const existingUsers =
-				// 	JSON.parse(localStorage.getItem("existing-users")) || [];
+				const existingUsers =
+					JSON.parse(localStorage.getItem("existing-users")) || [];
 
-				// const userExists = existingUsers.includes(email);
+				const userExists = existingUsers.includes(email);
 
 				// if (!userExists) {
 				// 	window.alert(
