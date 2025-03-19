@@ -386,17 +386,17 @@
 				localStorage.setItem("token", data?.token);
 				localStorage.setItem("profile", JSON.stringify(data?.profile))
 
-				const existingUsers =
-					JSON.parse(localStorage.getItem("existing-users")) || [];
+				// const existingUsers =
+				// 	JSON.parse(localStorage.getItem("existing-users")) || [];
 
-				const userExists = existingUsers.includes(email);
+				// const userExists = existingUsers.includes(email);
 
-				if (!userExists) {
-					window.alert(
-					"Account does not exist. You must register to continue."
-					);
-					return;
-				}
+				// if (!userExists) {
+				// 	window.alert(
+				// 	"Account does not exist. You must register to continue."
+				// 	);
+				// 	return;
+				// }
 				localStorage.setItem("email", email);
 				window.location.href = "/room.html";
 			}
